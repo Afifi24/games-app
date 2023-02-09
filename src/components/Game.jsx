@@ -1,11 +1,24 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useState,useRef } from 'react'
 import styled from 'styled-components'
 import { PopularGamesURL } from '../Api'
 import {SiCodeigniter} from 'react-icons/si'
+import GameDetails from './GameDetails'
 const Game = () => {  
   const [Upcoming,setUpcoming] = useState([])
   const [popular,setPopular] = useState([])
   const [newgames,setNewgames] = useState([])
+  const [show,setShow] = useState(false)
+  const [details,setDetails] = useState([])
+  const bgcontroll = useRef()
+  const HideShow = (e)=>{
+     if(bgcontroll.current==e.target){
+      setShow(false)
+     }
+  }
+  const OpenClose =(item)=>{
+    setShow(!show)
+    setDetails(item)
+  }
   const Getfetchupcoming = async ()=>{
     const response = await fetch('https://api.rawg.io/api/games?key=16e23b716a67472a919001040f08791f&dates=2023,2024&ordering=-added&page_size = 10')
     
@@ -37,7 +50,10 @@ useEffect(()=>{
 },[])
   return (
     <Gamestyle>
-      
+      <GameDetails details={details} bgcontroll={bgcontroll} show={show} HideShow={HideShow}
+    setShow={setShow}/>
+
+      <div className="container">
       {/* upcoming games */}
       <div className="upcoming">
         <div className="search">
@@ -53,7 +69,7 @@ useEffect(()=>{
            <div className="content">
            {Upcoming.map(item=>{
             return(
-              <div key={item.id} className="card">
+              <div onClick={()=>OpenClose(item)} key={item.id} className="card">
               <h2>{item.name}</h2>
               <div className="image">
               <img src={item.background_image} alt="" />
@@ -70,7 +86,7 @@ useEffect(()=>{
            <div className="content">
            {popular.map(item=>{
             return(
-              <div key={item.id} className="card">
+              <div onClick={()=>OpenClose(item)} key={item.id} className="card">
               <h2>{item.name}</h2>
               <div className="image">
               <img src={item.background_image} alt="" />
@@ -87,7 +103,7 @@ useEffect(()=>{
            <div className="content">
            {newgames.map(item=>{
             return(
-              <div key={item.id} className="card">
+              <div onClick={()=>OpenClose(item)} key={item.id} className="card">
               <h2>{item.name}</h2>
               <div className="image">
               <img src={item.background_image} alt="" />
@@ -98,6 +114,7 @@ useEffect(()=>{
 
            </div>
       </div>
+      </div>
     </Gamestyle>
   )
 }
@@ -105,8 +122,11 @@ useEffect(()=>{
 export default Game
 
 const Gamestyle = styled.div`
+.container{
 padding: 3rem 0rem;
-
+width: var(--container-width-lg);
+margin: auto;
+}
 .search{
   display: grid;
   place-items: center;
@@ -160,7 +180,7 @@ form{
   display: grid;
   grid-template-columns: repeat(auto-fit,minmax(300px,1fr));
   row-gap: 4rem;
-  column-gap: 3rem;
+  column-gap: 2rem;
   padding: 0rem 1rem;
   margin: 7rem 0rem;
 }
@@ -168,6 +188,7 @@ form{
   background-color: #fff;
   padding-top: 1rem;
   border-radius: 1rem;
+  cursor: pointer;
   h2{
     text-align: center;
     font-size: 1rem;
@@ -188,11 +209,8 @@ form{
     width: 100%;
     height: 100%;
     object-fit: cover;
-    opacity: 0.8;
     transition: 500ms;
-    &:hover{
-      opacity: 1;
-    }
+
 
 
   }

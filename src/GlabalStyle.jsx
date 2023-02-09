@@ -19,14 +19,7 @@ const Globalstyle = createGlobalStyle`
 body{
     background-color: var(--light-color);
     font-family: 'Kulim Park', sans-serif;
-    width: var(--container-width-lg);
-    margin: auto;
-    /* media queries */
-    @media screen and (max-width:600px){
-        width:var(--container-width-md);
-        margin: auto;
-         
-    } 
+    
 }
 
 `
