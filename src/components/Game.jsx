@@ -21,12 +21,10 @@ const Game = () => {
   }
   const Getfetchupcoming = async ()=>{
     const response = await fetch('https://api.rawg.io/api/games?key=16e23b716a67472a919001040f08791f&dates=2023,2024&ordering=-added&page_size = 10')
-    
     const data = await response.json()
     setUpcoming(data.results)
-   
-    
   }
+  console.log(Upcoming)
 
   const Getfetchpopular = async ()=>{
     const response = await fetch('https://api.rawg.io/api/games?key=16e23b716a67472a919001040f08791f&dates=2022,2023&ordering=-rating&page_size=10')
