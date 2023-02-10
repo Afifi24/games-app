@@ -19,6 +19,7 @@ const GameDetails =({bgcontroll,show,setShow,HideShow,details})=>{
              <h5>{details.name}</h5>
              <div className="rating">
                 <p>Rating: <span>{details.rating}</span></p>
+                {show &&
               <div className="stars">
                 {Math.floor(details.rating) ===3 &&(
                 <div className="hello">
@@ -76,23 +77,25 @@ const GameDetails =({bgcontroll,show,setShow,HideShow,details})=>{
                 </div>
                 )}
               </div>
+                  }
              </div>
              </div>
              <div className="right">
                 <h5>Platforms</h5>
-                <div className="formsdetails">
+                {show &&<div className="formsdetails">
                    
-                                {details.platforms.name=='PC' || 'Linux' && <img src={apple} alt="" />}
-                                {details.platforms.name=='PlayStation 5'|| 'PlayStation 4' && <img src={playstation} alt="" />}
-                                {details.platforms.name=="Xbox One"||  "Xbox Series S/X" &&  <img src={xbox} alt="" />}
-                                {details.platforms.name=="Nintendo Switch" &&  <img src={ninten} alt="" />}
-                                
-                          
-                </div>
+                   {(details.platforms.name==='PC' || 'Linux') && <img src={apple} alt="" />}
+                   {(details.platforms.name==='PlayStation 5'|| 'PlayStation 4') && <img src={playstation} alt="" />}
+                   {(details.platforms.name==="Xbox One"||  "Xbox Series S/X") &&  <img src={xbox} alt="" />}
+                   {(details.platforms.name==="Nintendo Switch") &&  <img src={ninten} alt="" />}
+                   
+             
+   </div>}
              </div>
 
              </header>
              
+             {show && <div>
              {details.short_screenshots.map(item=>{
                 return(
                     <div key= {item.id} className="imagee">
@@ -100,6 +103,7 @@ const GameDetails =({bgcontroll,show,setShow,HideShow,details})=>{
                  </div>
                 )
              })}
+             </div>}
 
            </div>
            </div>

@@ -15,9 +15,9 @@ const Game = () => {
       setShow(false)
      }
   }
-  const OpenClose =(item)=>{
-    setShow(!show)
-    setDetails(item)
+  const OpenClose = async(item)=>{
+     setShow(!show)
+     setDetails(item)
   }
   const Getfetchupcoming = async ()=>{
     const response = await fetch('https://api.rawg.io/api/games?key=16e23b716a67472a919001040f08791f&dates=2023,2024&ordering=-added&page_size = 10')
