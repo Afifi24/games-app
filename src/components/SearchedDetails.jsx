@@ -1,5 +1,7 @@
 import React,{useRef,useState} from 'react'
 import styled from 'styled-components'
+import {motion} from 'framer-motion'
+import { AnimatePresence } from 'framer-motion'
 import emptystar from '../img/star-empty.png'
 import fullstar from '../img/star-full.png'
 import apple from '../img/apple.svg'
@@ -8,18 +10,14 @@ import ninten from '../img/nintendo.svg'
 import playstation from '../img/playstation.svg'
 import steam from '../img/steam.svg'
 import xbox from '../img/xbox.svg'
-import {motion} from 'framer-motion'
-import { AnimatePresence } from 'framer-motion'
-const GameDetails =({bgcontroll,show,setShow,HideShow,details})=>{
+const SearchedDetails =({bgcontroll,show,HideShow,details})=>{
     return(
        
         <Gamedetailsstyle>
            <div onClick={(e)=>HideShow(e)} ref={bgcontroll} className={show?'containner active':'containner'}>
            <motion.div 
-           className="bg-container" 
-           layout
-            >
-             <header>
+           className="bg-container" layout >
+           <header>
              <div className="left">
              <h5>{details.name}</h5>
              <div className="rating">
@@ -99,23 +97,21 @@ const GameDetails =({bgcontroll,show,setShow,HideShow,details})=>{
              </div>
 
              </header>
-             
              {show && <div>
-             {details.short_screenshots.map(item=>{
+             {details.short_screenshots.map((item,idx)=>{
                 return(
-                    <div key= {item.id} className="imagee">
+                    <div key= {idx} className="imagee">
                     <img src={item.image} alt="" />
                  </div>
                 )
              })}
              </div>}
-
            </motion.div>
            </div>
         </Gamedetailsstyle>
     )
 }
-export default GameDetails;
+export default SearchedDetails;
 
 const Gamedetailsstyle = styled(motion.div)`
 
@@ -141,7 +137,7 @@ top: 0%;
    p{
     line-height:1.8;
    }
-   /* this one work for google and safari */
+
    ::-webkit-scrollbar {
     width: 8px;
   }
@@ -267,13 +263,7 @@ header{
      width: 80%;
     }
     
-   /* header{
-    .right,.left{
-        h2{
-        font-size:0.7rem;
-    }
-    }
-   } */
+   
 }
 
 `

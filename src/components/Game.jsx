@@ -1,7 +1,6 @@
 import React, { useEffect, useState,useRef } from 'react'
 import styled from 'styled-components'
 import { PopularGamesURL } from '../Api'
-import {SiCodeigniter} from 'react-icons/si'
 import GameDetails from './GameDetails'
 const Game = () => {  
   const [Upcoming,setUpcoming] = useState([])
@@ -24,7 +23,7 @@ const Game = () => {
     const data = await response.json()
     setUpcoming(data.results)
   }
-  console.log(Upcoming)
+
 
   const Getfetchpopular = async ()=>{
     const response = await fetch('https://api.rawg.io/api/games?key=16e23b716a67472a919001040f08791f&dates=2022,2023&ordering=-rating&page_size=10')
@@ -54,15 +53,7 @@ useEffect(()=>{
       <div className="container">
       {/* upcoming games */}
       <div className="upcoming">
-        <div className="search">
-            <div className="icons">
-              <SiCodeigniter/><small>ignite</small>
-            </div>
-            <form >
-              <input type="text" />
-              <button>Search</button>
-            </form>
-        </div>
+       
            <h1>Upcoming Games</h1>
            <div className="content">
            {Upcoming.map(item=>{
@@ -125,46 +116,7 @@ padding: 3rem 0rem;
 width: var(--container-width-lg);
 margin: auto;
 }
-.search{
-  display: grid;
-  place-items: center;
-  margin-bottom: 4rem;
-}
-.icons{
-  display: flex;
-  gap:.5rem;
-  font-size: 2rem;
-  align-items: center;
-  margin-bottom: 2rem;
-  small{
-    font-weight: 700;
-  }
 
-}
-form{
-  display: flex;
-  align-items: center;
-  input{
-    width:20rem;
-    height: 2.5rem;
-    border: none;
-    box-shadow: 0px 0px 20px rgba(255,255,255,0.1);
-    outline: none;
-    padding: 0rem 1rem;
-    font-size: 1.2rem;
-  }
-  button{
-    cursor: pointer;
-    width:7rem;
-    height:2.5rem;
-    border: none;
-    background-color: #ff2625;
-    color:#fff;
-    opacity: 0.7;
-    font-size:1.1rem;
-
-  }
-}
 .upcoming{
   h1{
     font-size: 2.8rem;
